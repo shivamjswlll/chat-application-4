@@ -1,0 +1,46 @@
+services:
+  frontend:
+    container_name: chat-frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:5173"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    container_name: chat-backend
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+
+  mongodb:
+    container_name: mongodb-container
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"  # Jenkins web interface
+      - "50000:50000" # For connecting agents (optional now)
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    privileged: true # Important to allow installing tools inside Jenkins
+
+  
+
+volumes:
+  mongo-data:
+  jenkins_home:

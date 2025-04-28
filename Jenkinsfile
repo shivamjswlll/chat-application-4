@@ -113,14 +113,14 @@ pipeline {
         stage('Docker Compose Build') {
             steps {
                 echo "Building Docker containers..."
-                sh "docker compose -f $DOCKER_COMPOSE_PATH build"
+                sh "docker-compose -f $DOCKER_COMPOSE_PATH build"
             }
         }
 
         stage('Docker Compose Up') {
             steps {
                 echo "Starting Docker containers..."
-                sh "docker compose -f $DOCKER_COMPOSE_PATH up -d"
+                sh "docker-compose -f $DOCKER_COMPOSE_PATH up -d"
             }
         }
     }

@@ -23,6 +23,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends docker-ce docke
 RUN curl -SL "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-linux-$(uname -m)" -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose
 
+# Start the Docker daemon in the background
+RUN dockerd -D &
+
 USER jenkins
 
 # Expose Docker daemon port (optional, for remote access to the inner Docker)

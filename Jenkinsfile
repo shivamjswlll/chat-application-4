@@ -11,6 +11,13 @@ pipeline {
 
     stages {
 
+        stage('Start Docker Daemon') {
+            steps {
+                sh 'dockerd -D &'
+                sleep 5 // Give the daemon a few seconds to start
+            }
+        }
+
         stage('Checkout Code') {
             steps {
                 echo "Cloning repository..."

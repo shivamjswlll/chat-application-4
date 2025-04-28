@@ -113,29 +113,29 @@ pipeline {
         stage('Docker Compose Build') {
             steps {
                 echo "Building Docker containers..."
-                sh "docker-compose -f $DOCKER_COMPOSE_PATH build"
+                sh "docker-compose $DOCKER_COMPOSE_PATH build"
             }
         }
 
         stage('Docker Compose Up') {
             steps {
                 echo "Starting Docker containers..."
-                sh "docker-compose -f $DOCKER_COMPOSE_PATH up -d"
+                sh "docker-compose $DOCKER_COMPOSE_PATH up -d"
             }
         }
     }
 
-    post {
-        always {
-            echo "Cleaning up unused docker images..."
-            sh "docker image prune -af || true"
-        }
-        success {
-            echo "Build completed successfully!"
-        }
-        failure {
-            echo "Build failed!"
-        }
-    }
+    // post {
+    //     always {
+    //         echo "Cleaning up unused docker images..."
+    //         sh "docker image prune -af || true"
+    //     }
+    //     success {
+    //         echo "Build completed successfully!"
+    //     }
+    //     failure {
+    //         echo "Build failed!"
+    //     }
+    // }
 }
 

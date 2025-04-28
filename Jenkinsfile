@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    tools {
+     tools {
         nodejs 'nodejs'  // Referencing the name you gave in Global Tool Configuration
     }
 
@@ -38,15 +38,15 @@ pipeline {
 
         stage('Docker Compose Build') {
             steps {
-                echo "Building Docker containers using Docker Compose..."
-                dockerComposeBuild()
+                echo "Building Docker containers..."
+                sh "docker-compose -f $DOCKER_COMPOSE_PATH build"
             }
         }
 
         stage('Docker Compose Up') {
             steps {
-                echo "Starting Docker containers using Docker Compose..."
-                dockerComposeUp()
+                echo "Starting Docker containers..."
+                sh "docker-compose -f $DOCKER_COMPOSE_PATH up -d"
             }
         }
 

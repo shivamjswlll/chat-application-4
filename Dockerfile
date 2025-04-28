@@ -2,14 +2,13 @@ FROM jenkins/jenkins:lts
 
 USER root
 
-# Install necessary dependencies
+# Install necessary dependencies for Docker
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
     curl \
     gnupg \
-    lsb-release \
-    sudo
+    lsb-release
 
 # Add Docker GPG key
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg

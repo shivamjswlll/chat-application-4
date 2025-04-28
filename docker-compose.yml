@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   frontend:
     container_name: chat-frontend
@@ -31,15 +32,15 @@ services:
     restart: unless-stopped
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build: ./  # Assuming your Dockerfile is in the same directory as docker-compose.yml
+    container_name: jenkins
     ports:
-      - "8080:8080"  # Jenkins web interface
-      - "50000:50000" # For connecting agents (optional now)
+      - "8080:8080"   # Jenkins web interface
+      - "50000:50000"  # For connecting agents (optional now)
     volumes:
       - jenkins_home:/var/jenkins_home
-    privileged: true # Important to allow installing tools inside Jenkins
-
-  
+      - /var/run/docker.sock:/var/run/docker.sock  # Mount the Docker socket
+    privileged: true  # Still useful for other potential Docker-related tasks
 
 volumes:
   mongo-data:

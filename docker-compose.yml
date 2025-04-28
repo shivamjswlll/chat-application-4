@@ -32,15 +32,14 @@ services:
     restart: unless-stopped
 
   jenkins:
-    build: ./  # Assuming your Dockerfile is in the same directory as docker-compose.yml
+    build: ./  # Or the path to your Dockerfile
     container_name: jenkins
     ports:
       - "8080:8080"   # Jenkins web interface
       - "50000:50000"  # For connecting agents (optional now)
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock  # Mount the Docker socket
-    privileged: true  # Still useful for other potential Docker-related tasks
+    privileged: true  # Still often needed for DinD 
 
 volumes:
   mongo-data:

@@ -1,49 +1,44 @@
 version: '3.8'
+
 services:
   frontend:
-    container_name: chat-frontend
-    build:
-      context: ./frontend
+    image: shivamjswl/frontend:latest
     ports:
       - "3000:5173"
+    restart: unless-stopped
     depends_on:
       - backend
-    restart: unless-stopped
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
   backend:
-    container_name: chat-backend
-    build:
-      context: ./backend
+    image: shivamjswl/backend:latest
     ports:
       - "8000:8000"
-    depends_on:
-      - mongodb
     env_file:
       - ./backend/.env
     restart: unless-stopped
+    depends_on:
+      - mongodb
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
   mongodb:
-    container_name: mongodb-container
     image: mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
     restart: unless-stopped
-
-  jenkins:
-    build: ./
-    container_name: jenkins
-    ports:
-      - "8080:8080"
-      - "50000:50000"
-    volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock   # ⬅️ Add this line
-    user: root 
-    privileged: true
-
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager  # optional: only if you want MongoDB on manager node
 
 volumes:
   mongo-data:
-  jenkins_home:

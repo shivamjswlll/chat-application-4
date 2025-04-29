@@ -53,7 +53,7 @@ function Register() {
   // console.log(inputData);
   return (
     <div className="flex flex-col items-center justify-center mix-w-full mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-lg bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+      <div className="w-[45%] p-6 rounded-lg shadow-lg bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className="text-3xl font-bold text-center text-gray-300">
           Login <span className="text-gray-950">Chatters</span>{" "}
         </h1>
@@ -153,22 +153,22 @@ function Register() {
           </div>
           <button
             type="submit"
-            className="mt-4 self-center w-auto px-2 py-1 bg-gray-950 text-lg text-white rounded-lg hover:scale-105 hover:bg-gray-900"
+            className="mt-4 self-center w-[60%] px-2 py-1 bg-gray-950 text-lg text-white rounded-lg hover:scale-105 hover:bg-gray-900"
           >
             {loading ? "Loading..." : "Register"}
           </button>
         </form>
-        <div className="pt-2">
+        <div className="pt-2 flex justify-around items-center">
           <p className="text-sm font-semibold text-gray-800">
             Already have an account?{" "}
-            <Link
-              to="/login"
-              className="text-gray-950 font-bold underline cursor-pointer hover:text-gray-50"
-              aria-label="Register for a new account"
-            >
-              Login Now!
-            </Link>
           </p>
+          <Link
+            to="/login"
+            className="text-gray-950 font-bold underline cursor-pointer hover:text-gray-50"
+            aria-label="Register for a new account"
+          >
+            Login Now!
+          </Link>
         </div>
       </div>
     </div>

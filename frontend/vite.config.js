@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/api": {
-        target: "http://chat-backend:8000",
+        target: "http://backend:8000",
         // target: "https://chatapp-backend-j23j.onrender.com/",
         changeOrigin: true,
         secure: false,

@@ -67,7 +67,7 @@ function Register() {
             <input
               type="text"
               onChange={handleInput}
-              placeholder="Apna pura naam daalo..."
+              placeholder="Name"
               className="w-full input input-bordered h-10"
               id="fullname"
               required
